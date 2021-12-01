@@ -2,8 +2,78 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import DataTable from 'react-data-table-component';
+import { useEffect, useState } from 'react';
+
+export interface Datapair {
+  provider : String
+  min_amount : String
+  max_amount : String
+  fee : String
+  rate : String
+  pair : String
+  url : String
+}
 
 const Home: NextPage = () => {
+
+  const [tableData, setTableData] = useState<Datapair[]>([]);
+  const [testText, settestText] = useState<String>("");
+
+  useEffect(() => {
+    var pairData : Datapair[] = [];
+    fetch('https://lnsov.ml:9001/getpairs')
+      .then(response => response.json())
+      .then(data => {
+        let pairs = data.pairs;
+        Object.entries(pairs).map(([key, value] : any) => {
+          pairData.push({
+            fee : value.fees.percentage + "%",
+            max_amount : value.limits.maximal,
+            min_amount : value.limits.minimal,
+            pair : key,
+            provider : "https://lnsov.vercel.app/",
+            rate : value.rate,
+            url : "https://lnsov.ml:9001",
+          });
+      });
+    });
+    //setTableData({...pairData});
+    setTableData(pairData);
+    console.log(pairData);
+  }, []);
+
+  const columns = [
+    {
+      name: 'Fee',
+      selector: row => row.fee,
+    },
+    {
+      name: 'Max amount',
+      selector: row => row.max_amount,
+    },
+    {
+      name: 'Min amount',
+      selector: row => row.min_amount,
+    },
+    {
+      name: 'pair',
+      selector: row => row.pair,
+    },
+    {
+      name: 'provider',
+      selector: row => row.provider,
+    },
+    {
+      name: 'rate',
+      selector: row => row.rate,
+    },
+    {
+      name: 'url',
+      selector: row => row.url,
+    }
+  ];
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,56 +84,26 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Lightning bridge marketplace
         </h1>
 
+        <button className={styles.button} onClick={() => {console.log(tableData); settestText('hello')}}>
+          Hello
+          </button>
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          This website is collection of Lightning bridges. It is a place where you can find all the information about the bridges. You can also find the bridge you are looking for.
         </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        { tableData != undefined && <DataTable
+          columns={columns}
+          data={tableData}
+        />
+        }
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
       </footer>
     </div>
   )
