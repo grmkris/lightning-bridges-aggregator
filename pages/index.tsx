@@ -16,7 +16,7 @@ export interface DataRow {
   name: string
 }
 
-const Home: NextPage = (props : any) => {
+const Home: NextPage = (props: any) => {
 
   const [tableData, setTableData] = useState<DataRow[]>([]);
 
@@ -94,19 +94,23 @@ const Home: NextPage = (props : any) => {
       </Head>
 
       <main>
-        <h1 className="text-5xl text-center mt-36">
+        <h2 className="text-5xl text-center mt-36">
           Lightning bridge marketplace
-        </h1>
+        </h2>
 
-        <p className="max-w-5xl text-xl mt-2 text-center">
-          This website is collection of Lightning bridges. It is a place where you can find all the information about the bridges. You can also find the bridge you are looking for.
+        <p className="text-xl mt-2 text-center max-w-5xl m-auto">
+          This website is collection of Lightning bridges. You can find here all the information about the providers and the pairs.
+
         </p>
 
         <div className="max-w-5xl m-auto">
-          <DataTable  columns={columns} data={tableData} highlightOnHover />
+          <DataTable columns={columns} data={tableData} highlightOnHover />
         </div>
-
-
+        <p className="text-sm mt-2 text-center max-w-5xl m-auto">
+          To run your own instance, clone this repo: <a className="text-indigo-500 hover:text-indigo-700" href=" https://github.com/pseudozach/lnsovbridge">Lnsovbridge </a>
+          <br></br>
+          Get your instance posted here, create PR here: <a className="text-indigo-500 hover:text-indigo-700" href="https://github.com/grmkris/lightning-bridges-aggregator/blob/main/bridge-providers.json">Bridge Providers </a>
+        </p>
       </main>
 
       <footer>
