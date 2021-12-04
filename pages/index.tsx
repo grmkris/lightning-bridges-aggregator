@@ -98,18 +98,18 @@ const Home: NextPage = (props: any) => {
           Lightning bridge marketplace
         </h2>
 
-        <p className="text-xl mt-2 text-center max-w-5xl m-auto">
+        <p className="text-xl mt-5 text-center max-w-5xl m-auto">
           This website is collection of Lightning bridges. You can find here all the information about the providers and the pairs.
 
         </p>
 
-        <div className="max-w-5xl m-auto">
+        <div className="max-w-5xl m-auto mt-5">
           <DataTable columns={columns} data={tableData} highlightOnHover />
         </div>
-        <p className="text-sm mt-2 text-center max-w-5xl m-auto">
-          To run your own instance, clone this repo: <a className="text-indigo-500 hover:text-indigo-700" href=" https://github.com/pseudozach/lnsovbridge">Lnsovbridge </a>
+        <p className="text-sm mt-10 text-center max-w-5xl m-auto">
+          To run your own instance, clone this repo: <a className="inline-flex items-center h-4 px-2 text-xs text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-800" href=" https://github.com/pseudozach/lnsovbridge">Lnsovbridge </a>
           <br></br>
-          Get your instance posted here, create PR here: <a className="text-indigo-500 hover:text-indigo-700" href="https://github.com/grmkris/lightning-bridges-aggregator/blob/main/bridge-providers.json">Bridge Providers </a>
+          Get your instance posted here, create PR here: <a className="mt-2 inline-flex items-center h-4 px-2 text-xs text-indigo-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-800" href="https://github.com/grmkris/lightning-bridges-aggregator/blob/main/bridge-providers.json">Bridge Providers </a>
         </p>
       </main>
 
