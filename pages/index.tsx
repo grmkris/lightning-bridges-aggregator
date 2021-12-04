@@ -14,6 +14,9 @@ export interface DataRow {
   pair: string
   url: string
   name: string
+  rbtcSwapAddress: string
+  erc20SwapAddress: string
+  chain: string
 }
 
 const Home: NextPage = (props: any) => {
@@ -40,7 +43,10 @@ const Home: NextPage = (props: any) => {
               provider: provider.publicUrl,
               rate: value.rate,
               url: provider.getPairUrl,
-              name: provider.name
+              name: provider.name,
+              rbtcSwapAddress: provider.rbtcSwapAddress,
+              erc20SwapAddress: provider.erc20SwapAddress,
+              chain: provider.chain
             }]);
           });
         });
@@ -80,8 +86,24 @@ const Home: NextPage = (props: any) => {
     {
       name: 'Rate',
       selector: (row: DataRow) => row.rate,
-      maxWidth: '200px',
+      maxWidth: '100px',
       sortable: true,
+    },
+    {
+      name: 'Chain',
+      selector: (row: DataRow) => row.chain,
+      maxWidth: '150px',
+      sortable: true,
+    },
+    {
+      name: 'Swap contracts',
+      cell: (row: DataRow) => <div className="flex flex-row items-center">
+        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer.testnet.rsk.co/address/"+row.erc20SwapAddress}>ERC20</a>
+        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer.testnet.rsk.co/address/"+row.rbtcSwapAddress}>RBTC</a>
+         </div>,
+      button: true,
+      wrap: true,
+      minWidth: '200px',
     }
   ];
 
@@ -103,7 +125,7 @@ const Home: NextPage = (props: any) => {
 
         </p>
 
-        <div className="max-w-5xl m-auto mt-5">
+        <div className="max-w-7xl m-auto mt-5">
           <DataTable columns={columns} data={tableData} highlightOnHover />
         </div>
         <p className="text-sm mt-10 text-center max-w-5xl m-auto">
