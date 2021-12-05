@@ -5,6 +5,18 @@
     "name": "lnsov-bridge-testnet",
     "rbtcSwapAddress": "0x598adb45a4eb8a1c12a0201dac4c163c23a4a674",
     "erc20SwapAddress": "0x422feec0bf3535992618459df33e641eadd40d2b",
-    "chain": "rsk-testnet"
+    "chain": "RSK Testnet"
+  },
+  {
+    "getPairUrl": "https://api.marduk.exchange:9001/getpairs",
+    "publicUrl": "https://marduk.exchange",
+    "name": "Marduk Exchange",
+    "rbtcSwapAddress": "0x9b076b17d7f9c17b7004aa865c707a68d29eb476",
+    "erc20SwapAddress": "0x1a43ab13ab58de67b4e7eede60f1fc08bb02e643",
+    "chain": "RSK Mainnet"
   }
+
+
+
+  
 ]
