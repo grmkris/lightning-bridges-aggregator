@@ -98,8 +98,8 @@ const Home: NextPage = (props: any) => {
     {
       name: 'Swap contracts',
       cell: (row: DataRow) => <div className="flex flex-row items-center">
-        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer.testnet.rsk.co/address/"+row.erc20SwapAddress}>ERC20</a>
-        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer.testnet.rsk.co/address/"+row.rbtcSwapAddress}>RBTC</a>
+        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer" + (row.chain.includes("Mainnet") ? "." : ".testnet.") + "rsk.co/address/" + row.erc20SwapAddress}>ERC20</a>
+        <a className="inline-flex items-center  h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-green-500 rounded-lg focus:shadow-outline hover:bg-green-800" href={"https://explorer" + (row.chain.includes("Mainnet") ? "." : ".testnet.") + "rsk.co/address/" + row.rbtcSwapAddress}>RBTC</a>
          </div>,
       button: true,
       wrap: true,
